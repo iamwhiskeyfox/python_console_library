@@ -20,15 +20,14 @@ class BooksApp:
             elif command == 'exit':
                 print('Всего хорошего! =)')
                 break
-            elif command == 'show_all':
+            elif command == 'showall':
                 books = self.adapter.get_all_books()
                 for book in books:
                     print(book)
             elif command == 'add':
-                self.adapter.save_new_book()
                 name = input('\n Введите название книги: \n>>>')
                 year = int(input('\n Введите год книги: \n>>>'))
-                author = int('\n Введите год книги: \n>>>')
+                author = input('\n Введите автора книги: \n>>>')
                 book = Book(name,year, author, 'Fiction')
                 self.adapter.save_new_book(book)
                 print('Книга добавлена успешно!')
@@ -37,6 +36,7 @@ class BooksApp:
                 book = self.adapter.get_book_by_id(id)
                 if book is not None:
                     self.adapter.delete_book(id)
+                    print(f'Книга {id} удалена успешно!')
                 else:
                     print('Книга не найдена!')
             else:
