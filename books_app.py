@@ -17,6 +17,7 @@ class BooksApp:
                 print('showall - Показать все книги')
                 print('add - Добавить команду')
                 print('delete - Удалить книгу')
+                print('get - Получить книгу')
             elif command == 'exit':
                 print('Всего хорошего! =)')
                 break

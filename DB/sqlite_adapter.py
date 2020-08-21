@@ -43,3 +43,17 @@ class SqliteBooksDbAdapter(BookDBAdapter):
         cursor.execute('INSERT INTO Books(name,year,author,genre) VALUES(?,?,?,?)',
                        (book.name, book.year, book.author, book.genre))
         self.connection.commit()
+
+    def get_book_by_id(self, id) -> Book or None:
+        cursor = self.connection.cursor()
+        row = cursor.execute('SELECT * FROM books where id=?', [int(id)]).fetchone()
+        if row is not None:
+            book = Book(row[1], row[2], row[3], row[4])
+            book.id = int(row[0])
+            return book
+        return None
+
+    def delete_book(self, id):
+        cursor = self.connection.cursor()
+        cursor.execute('DELETE FROM books where id=?', [int(id)])
+        self.connection.commit()
